@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>主页</title>
+        <link charset="utf-8" href="/static/css/main.css" rel="stylesheet" type="text/css"" />
+        <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="/static/ueditor/editor_config.js"></script>
+        <script type="text/javascript" src="/static/ueditor/editor_all.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                var editor = new baidu.editor.ui.Editor();
+                editor.render("post_content");
+            });
+        </script>
+        <link rel="stylesheet" href="/static/ueditor/themes/default/ueditor.css"/>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Title</h1>
+        </div>
+        <div class="container">
+            <div class="left">
+                <div class="main">
+                    <form action="{$post_url}" method="post" enctype="multipart/form-data">
+                        <div class="title">
+                            <h2>This is a test</h2>
+                        </div>
+                        <div class="content">
+                            <div class="post_form">
+                                <div class="post_title"><input name="title" type="text"/></div>
+                                <div class="post_content"><textarea id="post_content" name="content"></textarea></div>
+                                <div class="post_tags"><input type="text" name="tags"/></div>
+                                <div class="post_submit"><input type="submit" value="发布"/></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="right">
+                <div class="profile">
+                    name:{$nickname}<br />
+                    addr:{$addr}
+                </div>
+                <div class="cata_list">
+                    {if="!empty($catalogs)"}
+                    <ul>
+                        {loop="catalogs"}
+                        <li>
+                            <div class="cata_title">
+                                <h4><a href="javascript:;">{$value.name}({$value.count})</a></h4>
+                            </div>
+                        </li>
+                        {/loop}
+                    </ul>
+                    {else}
+                    {/if}
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            copyright:ss
+        </div>
+    </body>
+</html>
