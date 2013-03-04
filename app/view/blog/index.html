@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<div class="content-header">
+
+</div>
+<div class="content-middle">
+	<ul class="content-list">
+		{% for blog in blogs %}
+		<li class="content-list-item">
+			<a href="/index.php?c=blog&a=disp&blogid={{ blog.blogid }}">{{ blog.title }}</a>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endblock %} 
