@@ -29,6 +29,17 @@ class User_Model extends Model{
         return $userid;
     }
     
+    function newUserThird($name,$token){
+        $db = $this->getSource();
+        $data = array(
+            'name' => $name,
+            'token' => $token,
+            'created' => intval($_SERVER['REQUEST_TIME']),
+        );
+        $userid = $db->insert($data);
+        return $userid;
+    }
+    
     function getId($name){
         $db = $this->getSource();
         $data = array(
@@ -94,5 +105,3 @@ class User_Model extends Model{
         unset($_SESSION['uid']);
     }
 }
-
-?>

@@ -70,5 +70,3 @@ class Catalog_Model extends Model{
     }
     
 }
-
-?>

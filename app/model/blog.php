@@ -24,6 +24,7 @@ CREATE  TABLE `user` (
   `email` VARCHAR(45) NOT NULL ,
   `mobile` VARCHAR(15) NOT NULL ,
   `addr` VARCHAR(45) NOT NULL ,
+  `token` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`uid`) )
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
@@ -135,5 +136,3 @@ COLLATE = utf8_general_ci;
     }
     
 }
-
-?>

@@ -71,5 +71,3 @@ class Tag_Model extends Model{
     
     
 }
-
-?>
