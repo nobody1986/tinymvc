@@ -13,7 +13,7 @@ define('DB_DRIVER','sqlite');
 
 define('APP_THEME','v2ex');
 define('APP_THEME_DIR',TINY_VIEW_DIR.'theme'.DIRECTORY_SEPARATOR.APP_THEME.DIRECTORY_SEPARATOR);
-define('APP_THEME_URI','/static/theme/'.APP_THEME.'/');
+define('APP_THEME_URI','/static/themes/'.APP_THEME.'/');
 
 Core::config('database',array(
     'host' => 'localhost',
@@ -26,4 +26,5 @@ Core::config('database',array(
 Core::config('site_info',array(
     'title' => '星光之地',
     'desc' => '随着时光，大家都被杀猪刀削去了点什么。',
+    'app_theme_uri' => APP_THEME_URI,
 ));

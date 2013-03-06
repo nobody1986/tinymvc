@@ -1,155 +1,155 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-	<head>
-		{% block head %} <title>{{ site_title }}</title>
-		<!-- Bootstrap -->
-		<link href="/static/css/bootstrap.min.css" rel="stylesheet">
-		<style>
-			body {
-				padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-			}
-			#login-pop {
-				width: 450px;
-				height: 280px;
-			}
-			.content-header {
-				height: 100px;
-				background-color: green;
-			}
-			.content-middle {
+    <head>
+        {% block head %} <title>{{ site_title }}</title>
+        <!-- Bootstrap -->
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body {
+                padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+            }
+            #login-pop {
+                width: 450px;
+                height: 280px;
+            }
+            .content-header {
+                height: 100px;
+                background-color: green;
+            }
+            .content-middle {
 
-			}
-			ul.content-list li.content-list-item {
-				width: 100%;
-				height: 150px;
-				list-style: none;
-				border-bottom: 1px dashed #999999;
-			}
-			.footer {
-				height: 200px;
-			}
-		</style>
-		{% endblock %}
-	</head>
-	<body>
-		{% block navbar %}
-		<div class="navbar navbar-inverse navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container">
-					<a class="brand" href="/">The Kalimudo</a>
-					<div class="nav-collapse collapse">
-						<ul class="nav">
-							<li class="active">
-								<a href="#">Home</a>
-							</li>
-							<li>
-								<a href="#about">About</a>
-							</li>
-							<li>
-								<a href="#contact">Contact</a>
-							</li>
-						</ul>
-						<ul class="nav pull-right">
-							<li class="active">
-								<a href="#">Home</a>
-							</li>
-							<li class="divider-vertical"></li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">xxxxx<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li>
-										<a href="#">退出</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div><!--/.nav-collapse -->
-				</div>
-			</div>
-		</div>
-		{% endblock %}
-		<div class="container">
-			<div class="row">
-				<div class="span9">
-					{% block page_content %}
-					<div class="content-header">
-						<h1>title</h1>
-					</div>
-					<div class="content-middle">
-						<form>
-							<p>
-								<input class="input-xxlarge" type="text" placeholder="title">
-							</p>
-							<p>
-								<textarea class="textarea" rows="30" style="width: 100%;"></textarea>
-</p>							<p>
-								<button type="submit" class="btn">
-									Submit
-								</button>
-							</p>
-						</form>
-					</div>
-					{% endblock %}
-				</div>
-				<div class="span3 bs-docs-sidebar">
-					{% block page_side %}
-					<button type="button" data-toggle="modal" data-target="#login-pop">
-						Launch modal
-					</button>
-					{% endblock %}
-				</div>
-				
-			</div>
-		</div>
-		<div class="footer row">
-			{% block page_footer%}
-			{% endblock %}
-		</div>
-		{% block login_pop%}
-		<div id="login-pop" class="modal hide fade" role="dialog">
-			<div class="modal-header">
-				登录
-			</div>
-			<div class="modal-body">
-				<form class="form-horizontal">
-					<div class="control-group">
-						<label class="control-label" for="inputEmail">Email</label>
-						<div class="controls">
-							<input type="text" id="inputEmail" placeholder="Email">
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="inputPassword">Password</label>
-						<div class="controls">
-							<input type="password" id="inputPassword" placeholder="Password">
-						</div>
-					</div>
-					<div class="control-group">
-						<div class="controls">
-							<label class="checkbox">
-								<input type="checkbox">
-								Remember me </label>
-							<button type="submit" class="btn">
-								Sign in
-							</button>
-						</div>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer"></div>
-		</div>
-		{% endblock %}
-		{% block import_js %}
-		<script src="/static/js/jquery.js"></script>
-		<script src="/static/js/bootstrap.min.js"></script>
-		{% endblock %}
-		{% block page_js %}
-		<script type="text/javascript">
-			$(document).ready(function() {
-				//                $('.dropdown-toggle').dropdown();
-			});
+            }
+            ul.content-list li.content-list-item {
+                width: 100%;
+                height: 150px;
+                list-style: none;
+                border-bottom: 1px dashed #999999;
+            }
+            .footer {
+                height: 200px;
+            }
+        </style>
+        {% endblock %}
+    </head>
+    <body>
+        {% block navbar %}
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="/">The Kalimudo</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="active">
+                                <a href="#">Home</a>
+                            </li>
+                            <li>
+                                <a href="#about">About</a>
+                            </li>
+                            <li>
+                                <a href="#contact">Contact</a>
+                            </li>
+                        </ul>
+                        <ul class="nav pull-right">
+                            <li class="active">
+                                <a href="#">Home</a>
+                            </li>
+                            <li class="divider-vertical"></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">xxxxx<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">退出</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+        <div class="container">
+            <div class="row">
+                <div class="span9">
+                    {% block page_content %}
+                    <div class="content-header">
+                        <h1>title</h1>
+                    </div>
+                    <div class="content-middle">
+                        <form>
+                            <p>
+                                <input class="input-xxlarge" type="text" placeholder="title">
+                            </p>
+                            <p>
+                                <textarea class="textarea" rows="30" style="width: 100%;"></textarea>
+                            </p>							<p>
+                                <button type="submit" class="btn">
+                                    Submit
+                                </button>
+                            </p>
+                        </form>
+                    </div>
+                    {% endblock %}
+                </div>
+                <div class="span3 bs-docs-sidebar">
+                    {% block page_side %}
+                    <button type="button" data-toggle="modal" data-target="#login-pop">
+                        Launch modal
+                    </button>
+                    {% endblock %}
+                </div>
 
-		</script>
-		{% endblock %}
-	</body>
+            </div>
+        </div>
+        <div class="footer row">
+            {% block page_footer%}
+            {% endblock %}
+        </div>
+        {% block login_pop%}
+        <div id="login-pop" class="modal hide fade" role="dialog">
+            <div class="modal-header">
+                登录
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">Email</label>
+                        <div class="controls">
+                            <input type="text" id="inputEmail" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputPassword">Password</label>
+                        <div class="controls">
+                            <input type="password" id="inputPassword" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                                Remember me </label>
+                            <button type="submit" class="btn">
+                                Sign in
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+        {% endblock %}
+        {% block import_js %}
+        <script src="/static/js/jquery.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
+        {% endblock %}
+        {% block page_js %}
+        <script type="text/javascript">
+            $(document).ready(function() {
+                //                $('.dropdown-toggle').dropdown();
+            });
+
+        </script>
+        {% endblock %}
+    </body>
 </html>

@@ -13,8 +13,8 @@ class View {
 		Twig_Autoloader::register();
 		$loader = new Twig_Loader_Filesystem(TINY_VIEW_DIR);
 		$this->_obj = new Twig_Environment($loader, array('cache' => TINY_TMP_DIR, ));
-		$this -> _filename = $filename;
-		$this -> _data = $data;
+		$this->_filename = $filename;
+		$this->_data = $data;
 	}
 
 	function setData(Array $data) {
