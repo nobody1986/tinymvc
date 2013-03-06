@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 class Blog_Controller extends Controller{
     function post(){
         if(empty($_POST['content'])){

@@ -10,6 +10,11 @@ define('TINY_TMP_DIR',TINY_APP_DIR.TINY_TMP_DIRNAME.DIRECTORY_SEPARATOR);
 
 define('TINY_DEBUG',true);
 define('DB_DRIVER','sqlite');
+
+define('APP_THEME','v2ex');
+define('APP_THEME_DIR',TINY_VIEW_DIR.'theme'.DIRECTORY_SEPARATOR.APP_THEME.DIRECTORY_SEPARATOR);
+define('APP_THEME_URI','/static/theme/'.APP_THEME.'/');
+
 Core::config('database',array(
     'host' => 'localhost',
     'name' => 'root',
