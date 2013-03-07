@@ -219,7 +219,7 @@ class Core {
 //            $filename = strtolower($path) . TINY_PHP_SUFFIX;
             if (!isset(self::$TINY_IMPORTED[$filename])) {
                 $include_path = get_include_path();
-                if(strpos($include_path, ':')){
+                if(strpos($include_path, ';') === false){
                     //linux
                     $include_path = explode(':', $include_path);
                 }else{

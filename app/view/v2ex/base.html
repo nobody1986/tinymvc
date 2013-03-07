@@ -45,8 +45,10 @@
                                                                                 <td width="500" align="right" style="padding-top: 2px;">
                                                                                     <a href="http://www.v2ex.com/" class="top">首页</a>&nbsp;&nbsp;&nbsp;
                                                                                     {% block reg %}
+                                                                                    {% if isLogined %}
                                                                                     <a href="http://www.v2ex.com/signup" class="top">注册</a>&nbsp;&nbsp;&nbsp;
                                                                                     <a href="http://www.v2ex.com/signin" class="top">登入</a>
+                                                                                    {% endif %}
                                                                                     {% endblock %}
                                                                                 </td>
                                                                             </tr>
