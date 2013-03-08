@@ -1,139 +1,69 @@
-{% extends "v2ex/base.html" %}
-
-{% block js_code %}
-<script>
-    $(function() {
-        $( "#MyNodes" ).sortable();
-        $( "#MyNodes" ).disableSelection();
-        $( "#MyNodes" ).sortable({
-            stop: function( event, ui ) {
-                var sorted = $( "#MyNodes" ).sortable( "serialize", { key: "n" } );
-                $.post('/my/nodes/sorted', { sorted : sorted }, function(data) {
-                    
-                });
-            }
-        });
-    });
-</script>
-{% endblock %}
-{% block rightbar %}
-<div class="sep20"></div>
-
-<div class="box">
-    <div class="cell">
-        <strong>V2EX = way to explore</strong>
-        <div class="sep5"></div>
-        <span class="fade">V2EX 是一个关于分享和探索的地方</span>
-    </div>
-    <div class="inner">
-        <div class="sep5"></div>
-        <div align="center"><a href="http://www.v2ex.com/signup" class="super normal button">现在注册</a>
-            <div class="sep5"></div>
-            <div class="sep10"></div>
-            已注册用户请 <a href="http://www.v2ex.com/signin">登入</a></div>
-    </div>
+$def with (cats, posts, title = None)
+$var title : $title
+$var widgets = ['user_panel_widget', 'hot_posts_today_widget', 'site_statics_widget']
+<div id="Main">
+<div class="sep20">
 </div>
-
-<div class="box" id="TopicsHot">
-    <div class="cell"><span class="fade">本日热议主题</span></div>
-
-    <div class="cell from_32697">
+<div class="box">
+    <div class="cell" id="Tabs">
+        <a href="/" class="tab_current">全部</a>
+    </div>
+$for post_cur in posts:
+    $ post = post_cur['post']
+    $ user = post_cur['user']
+    $ node = post_cur['node']
+    $ comment_user = post_cur['comment_user']
+    <div class="cell item">
         <table cellpadding="0" cellspacing="0" border="0" width="100%">
-            <tbody><tr>
-                    <td width="24" valign="middle" align="center">
-                        <a href="http://www.v2ex.com/member/vvniu"><img src="./V2EX_files/32697_normal.png" class="avatar" border="0" align="default" style="max-width: 24px; max-height: 24px;"></a>
-                    </td>
-                    <td width="10"></td>
-                    <td width="auto" valign="middle">
-                        <span class="item_hot_topic_title">
-                            <a href="http://www.v2ex.com/t/62010">老实人怎么在这个世界上生活</a>
-                        </span>
-                    </td>
-                </tr>
-            </tbody></table>
-    </div>
-</div>
-<div class="sep20"></div>
-<div class="box">
-    <div class="cell"><div class="fr"><img src="./V2EX_files/promoted.png" align="absmiddle" border="0" alt="Promoted"> &nbsp;<a href="https://orca.io/" onclick="recordOutboundLink(this, &#39;Outbound Links&#39;, &#39;orca.io&#39;);" target="_blank">ORCA</a> &nbsp;<span class="fade">加速你的网站</span></div><span class="fade">最热节点</span></div>
-    <div class="cell">
-        <a href="http://www.v2ex.com/go/qna" class="item_node">问与答</a><a href="http://www.v2ex.com/go/share" class="item_node">分享发现</a><a href="http://www.v2ex.com/go/all4all" class="item_node">二手交易</a><a href="http://www.v2ex.com/go/macosx" class="item_node">Mac OS X</a><a href="http://www.v2ex.com/go/v2ex" class="item_node">V2EX</a><a href="http://www.v2ex.com/go/programmer" class="item_node">程序员</a><a href="http://www.v2ex.com/go/autistic" class="item_node">自言自语</a><a href="http://www.v2ex.com/go/in" class="item_node">分享邀请码</a><a href="http://www.v2ex.com/go/iphone" class="item_node">iPhone</a><a href="http://www.v2ex.com/go/flood" class="item_node">水</a><a href="http://www.v2ex.com/go/jobs" class="item_node">酷工作</a><a href="http://www.v2ex.com/go/babel" class="item_node">Project Babel</a><a href="http://www.v2ex.com/go/create" class="item_node">分享创造</a><a href="http://www.v2ex.com/go/idev" class="item_node">iDev</a><a href="http://www.v2ex.com/go/random" class="item_node">随想</a><a href="http://www.v2ex.com/go/python" class="item_node">Python</a><a href="http://www.v2ex.com/go/afterdark" class="item_node">天黑以后</a><a href="http://www.v2ex.com/go/android" class="item_node">Android</a><a href="http://www.v2ex.com/go/mbp" class="item_node">MacBook Pro</a><a href="http://www.v2ex.com/go/gae" class="item_node">Google App Engine</a>
-    </div>
-    <div class="inner"><a href="http://www.v2ex.com/index.xml" target="_blank"><img src="./V2EX_files/rss.png" align="absmiddle" border="0" style="margin-top:-3px;"></a>&nbsp; <a href="http://www.v2ex.com/index.xml" target="_blank">RSS</a></div>
-</div>
-<div class="sep20"></div>
-<div class="box">
-    <div class="cell"><div class="fr"><img src="./V2EX_files/promoted.png" align="absmiddle" border="0" alt="Promoted"> &nbsp;<a href="http://www.v2ex.com/cloud/index" onclick="recordOutboundLink(this, &#39;Outbound Links&#39;, &#39;v2ex.com&#39;);" target="_blank">云服务器指数</a> &nbsp;<span class="fade">Cloud Index</span></div><span class="fade">最近新增节点</span></div>
-    <div class="inner">
-        <a href="http://www.v2ex.com/go/tw" class="item_node">台湾</a><a href="http://www.v2ex.com/go/ml" class="item_node">机器学习</a><a href="http://www.v2ex.com/go/euca" class="item_node">Eucalyptus</a><a href="http://www.v2ex.com/go/immt" class="item_node">我叫 MT</a><a href="http://www.v2ex.com/go/ps4" class="item_node">PlayStation 4</a><a href="http://www.v2ex.com/go/cloudera" class="item_node">Cloudera</a><a href="http://www.v2ex.com/go/re6" class="item_node">Resident Evil 6</a><a href="http://www.v2ex.com/go/alfred" class="item_node">Alfred</a><a href="http://www.v2ex.com/go/debian" class="item_node">Debian</a><a href="http://www.v2ex.com/go/fluentd" class="item_node">Fluentd</a><a href="http://www.v2ex.com/go/discourse" class="item_node">Discourse</a><a href="http://www.v2ex.com/go/asia" class="item_node">亚洲</a><a href="http://www.v2ex.com/go/kr" class="item_node">韩国</a><a href="http://www.v2ex.com/go/mx" class="item_node">墨西哥</a><a href="http://www.v2ex.com/go/cn" class="item_node">中国</a><a href="http://www.v2ex.com/go/ca" class="item_node">加拿大</a><a href="http://www.v2ex.com/go/ts" class="item_node">Traffic Server</a><a href="http://www.v2ex.com/go/ansible" class="item_node">Ansible</a><a href="http://www.v2ex.com/go/vagrant" class="item_node">Vagrant</a><a href="http://www.v2ex.com/go/hubot" class="item_node">HUBOT</a>
-    </div>
-</div>
-<div class="sep20"></div>
-<div class="box">
-    <div class="cell"><span class="fade">社区运行状况</span></div>
-    <div class="cell">
-        <table cellpadding="5" cellspacing="0" border="0" width="100%">
-            <tbody><tr>
-                    <td width="50" align="right"><span class="gray">注册会员</span></td>
-                    <td width="auto" align="left"><strong>35291</strong></td>
-                </tr>
+            <tbody>
                 <tr>
-                    <td width="50" align="right"><span class="gray">主题</span></td>
-                    <td width="auto" align="left"><strong>60708</strong></td>
-                </tr>
-                <tr>
-                    <td width="50" align="right"><span class="gray">回复</span></td>
-                    <td width="auto" align="left"><strong>553170</strong></td>
-                </tr>
-            </tbody></table>
-    </div>
-    <div class="inner">
-        <span class="chevron">›</span> <a href="http://www.v2ex.com/top/rich">财富排行榜</a>
-        <div class="sep5"></div>
-        <span class="chevron">›</span> <a href="http://www.v2ex.com/top/player">消费排行榜</a>
-    </div>
-</div>
-<div class="sep20"></div>
-{% endblock %}
-{% block main %}
-<div class="sep20"></div>
-
-<div class="box">
-    <div class="inner" style="background-color: #fff; border-top-left-radius: 3px; border-top-right-radius: 3px;" id="Tabs">
-        <a href="http://www.v2ex.com/?tab=tech" class="tab_current">技术</a><a href="http://www.v2ex.com/?tab=creative" class="tab">创意</a><a href="http://www.v2ex.com/?tab=play" class="tab">好玩</a><a href="http://www.v2ex.com/?tab=apple" class="tab">Apple</a><a href="http://www.v2ex.com/?tab=jobs" class="tab">酷工作</a><a href="http://www.v2ex.com/?tab=deals" class="tab">交易</a><a href="http://www.v2ex.com/?tab=city" class="tab">城市</a><a href="http://www.v2ex.com/?tab=qna" class="tab">问与答</a><a href="http://www.v2ex.com/?tab=hot" class="tab">最热</a><a href="http://www.v2ex.com/?tab=all" class="tab">全部</a>
-    </div>
-    <div class="cell" style="background-color: #f9f9f9; padding: 10px 10px 10px 20px;"><a href="http://www.v2ex.com/go/programmer">程序员</a> &nbsp; &nbsp; <a href="http://www.v2ex.com/go/python">Python</a> &nbsp; &nbsp; <a href="http://www.v2ex.com/go/idev">iDev</a> &nbsp; &nbsp; <a href="http://www.v2ex.com/go/linux">Linux</a> &nbsp; &nbsp; <a href="http://www.v2ex.com/go/nodejs">node.js</a> &nbsp; &nbsp; <a href="http://www.v2ex.com/go/cloud">云计算</a></div>
-{% for blog in blogs %}
-    <div class="cell item" style="border-top-left-radius: 3px; border-top-right-radius: 3px;">
-        <table cellpadding="0" cellspacing="0" border="0" width="100%">
-            <tbody><tr>
-
-                    <td width="48" valign="top" align="center"><a href="http://www.v2ex.com/member/yyaadet"><img src="./V2EX_files/avatar_normal.png" class="avatar" border="0" align="default" auto=""></a></td>
-                    <td width="10"></td>
-
-                    <td width="auto" valign="middle"><span class="item_title"><a href="http://www.v2ex.com/t/60056#reply32">{{ blog.title }}</a></span>
-                        <div class="sep5"></div>
-                        <span class="small fade"><a class="node" href="http://www.v2ex.com/go/programmer">程序员</a> &nbsp;•&nbsp; <strong><a href="http://www.v2ex.com/member/yyaadet">yyaadet</a></strong> &nbsp;•&nbsp; 2 分钟前 &nbsp;•&nbsp; 最后回复来自 <strong><a href="http://www.v2ex.com/member/yyaadet">yyaadet</a></strong></span>
+                    <td width="48" valign="top" align="center"><a href="/profile/$user.name">
+                            <img src="$helper.avatar_url(user.avatar)" class="avatar">
+                        </a>
                     </td>
-                    <td width="50" align="right" valign="middle">
-
-                        <a href="http://www.v2ex.com/t/60056#reply32" class="count_livid">32</a>
-
+                    <td width="10">
                     </td>
+                    <td width="auto" valign="middle"><span class="item_title"><a href="/post/$post.id">$:post.title</a></span>
+                    <div class="sep5">
+                    </div>
+                    <span class="small fade"><a class="node" href="/node/$node.name">$node.display_name</a> &nbsp;•&nbsp; <strong><a href="/profile/$user.name">$user.name</a></strong>&nbsp;•&nbsp; $helper.stamp2during(post.last_update)
+                    $if comment_user is not None:
+                         &nbsp;•&nbsp; 最后回复来自 <strong><a href="/profile/$comment_user.name">$comment_user.name</a></strong>
+                    </span>
+                    </td>
+                    $if post.comments > 0:
+                        <td width="50" align="right" valign="middle">
+                            <a href="/post/$post.id" class="count_livid">$post.comments</a>
+                        </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    {% endfor %}
-    <div class="inner"><div class="fr"><a href="http://www.v2ex.com/feed/tab/tech.xml" target="_blank"><img src="./V2EX_files/rss.png" align="absmiddle" style="margin-top:-3px;" border="0"></a>&nbsp; <a href="http://www.v2ex.com/feed/tab/tech.xml" target="_blank">通过 Atom Feed 订阅</a></div>
-        <span class="chevron">→</span> <a href="http://www.v2ex.com/recent">更多新主题</a>
-    </div>
+<div class="inner">
+    <span class="chevron">→</span> <a href="/recent">更多新主题</a>
 </div>
-
-<div class="sep20"></div>
+</div>
+<div class="sep20">
+</div>
 <div class="box">
-    <div class="cell"><div class="fr"><a href="http://www.v2ex.com/planes">浏览全部节点</a></div><span class="fade"><strong>V2EX</strong> / 节点导航</span></div>
-    <div class="cell"><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td align="right" width="60"><span class="fade">分享与探索</span></td></tr></tbody></table></div>
+    <div class="cell"><div class="fr"><a>这儿就是全部节点=.=</a></div><span class="fade"><strong>$site_options['title']</strong> / 节点导航</span></div>
+$for cat_cur in cats:
+    $ cat = cat_cur['cat']
+    $ nodes = cat_cur['node']
+    <div class="cell">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+                <tr>
+                    <td align="right" width="60">
+                        <span class="fade">$cat.display_name</span>
+                    </td>
+                    <td style="line-height: 200%; padding-left: 10px;">
+                        $for node in nodes:
+                            <a href="/node/$node.name" style="font-size: 14px;">$node.display_name</a>&nbsp; &nbsp; 
+                    </td>
+                </tr>
+               </tbody>
+           </table>
+       </div>
 </div>
-
-{% endblock %}
+</div>

@@ -8,6 +8,7 @@ html {
 body {
     padding: 0px;
     margin: 0px;
+    background-color: #fff;
     font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti !important;
 }
 
@@ -74,6 +75,7 @@ a.tab:link, a.tab:visited, a.tab:active {
     padding: 5px 8px 5px 8px;
     margin-right: 5px;
     border-radius: 3px;
+    background-color: #fff;
     color: #555;
 }
 
@@ -192,14 +194,9 @@ ul {
     padding: 0px;
 }
 
-ul li, ol li {
+ul li {
     padding: 0px;
     margin: 0px;
-}
-
-ol {
-    margin: 1em 0px 0em 2em;
-    padding: 0px;
 }
 
 #Top {
@@ -215,7 +212,7 @@ ol {
 #Wrapper {
     text-align: center;
     background-color: #d0d0d0;
-    background-image: url("/static/img/shadow.png"), url("/static/img/bg_grid.png");
+    background-image: url("/static/img/shadow.png");
     background-repeat: repeat-x, repeat;
 }
 
@@ -224,14 +221,6 @@ ol {
     background-color: #fff;
     text-align: center;
     color: #999;
-}
-
-#MySQL {
-    background-color: #333;
-    padding: 5px;
-    font-size: 12px;
-    color: #fff;
-    border-top: 2px solid #ccc;
 }
 
 #Leftbar {
@@ -310,6 +299,7 @@ ol {
     border-radius: 3px;
     -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+    border-bottom: 2px solid #fef8ee;
     border-bottom: 2px solid #e2e2e9;
 }
 
@@ -367,39 +357,6 @@ ol {
     border-bottom: 1px solid #e2e2e2;
 }
 
-div.node {
-    padding: 5px;
-    background-color: transparent;
-    border-radius: 3px;
-    box-shadow: none;
-}
-
-div.node .node_compose {
-    float: right;
-    visibility: hidden;
-    margin: 3px 0px 0px 0px;
-}
-
-div.node:hover {
-    background-color: #f9f9f9;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1) inset;
-}
-
-div.node:hover .node_compose {
-    float: right;
-    visibility: visible;
-}
-
-.subtle {
-    background-color: #fffff9;
-    border-left: 3px solid #fffbc1;
-    padding: 10px;
-    font-size: 12px;
-    line-height: 120%;
-    text-align: left;
-    border-bottom: 1px solid #e2e2e2;
-}
-
 .grid {
     padding: 0px;
     font-size: 13px;
@@ -414,17 +371,6 @@ div.node:hover .node_compose {
     text-align: left;
     background-color: #ffffc0;
     border-left: 5px solid #fff000;
-    border-bottom: 1px solid #e2e2e2;
-    color: #333;
-}
-
-.message {
-    padding: 10px;
-    font-size: 13px;
-    line-height: 120%;
-    text-align: left;
-    background-color: #f3faff;
-    border-left: 5px solid #c7e8ff;
     border-bottom: 1px solid #e2e2e2;
     color: #333;
 }
@@ -955,7 +901,7 @@ table.data {
     
 }
 
-table.data td.h, table.data th.h {
+table.data td.h {
     text-align: left;
     font-size: 12px;
     font-weight: bold;

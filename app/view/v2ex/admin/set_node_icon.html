@@ -1,6 +1,6 @@
-$def with (title, user, crumb, message='')
+$def with (title, crumb, node, message='')
 $var title: $title
-$var widgets=['user_panel_widget']
+$var widgets = None
 <div id="Main">
 <div class="sep20">
 </div>
@@ -11,16 +11,16 @@ $var widgets=['user_panel_widget']
     <div class="inner"><form method="post" enctype="multipart/form-data">
         <table cellpadding="5" cellspacing="0" border="0" width="100%">
             <tbody><tr>
-                <td width="120" align="right">当前头像</td>
+                <td width="120" align="right">当前图标</td>
                 <td width="auto" align="left">
-                    <img src="$helper.avatar_url(user.avatar, 'big')" class="avatar" border="0"> &nbsp; 
-                    <img src="$helper.avatar_url(user.avatar, 'normal')" class="avatar" border="0"> &nbsp; 
-                    <img src="$helper.avatar_url(user.avatar, 'tiny')" class="avatar" border="0">
+                    <img src="$helper.icon_url(node.icon, 'big')" class="avatar" border="0"> &nbsp; 
+                    <img src="$helper.icon_url(node.icon, 'normal')" class="avatar" border="0"> &nbsp; 
+                    <img src="$helper.icon_url(node.icon, 'tiny')" class="avatar" border="0">
                 </td>
             </tr>
             <tr>
                 <td width="120" align="right">选择一个图片文件</td>
-                <td width="auto" align="left"><input type="file" name="avatar"></td>
+                <td width="auto" align="left"><input type="file" name="icon"></td>
             </tr>
             <tr>
                 <td width="120" align="right">
