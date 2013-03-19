@@ -12,7 +12,7 @@ class View {
 		Core::import('third.Twig.Autoloader');
 		Twig_Autoloader::register();
 		$loader = new Twig_Loader_Filesystem(TINY_VIEW_DIR);
-		$this->_obj = new Twig_Environment($loader, array('cache' => TINY_TMP_DIR, ));
+		$this->_obj = new Twig_Environment($loader, array('cache' => TINY_TMP_DIR,'debug' => true ));
 		$this->_filename = $filename;
 		$this->_data = $data;
 	}

@@ -1,6 +1,6 @@
 <?php
 define('TINY_ROOT',dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR);
-define('TINY_DEFAULT_CONTROLLER','default');
+define('TINY_DEFAULT_CONTROLLER','index');
 define('TINY_DEFAULT_ACTION','index');
 
 define('TINY_PHP_SUFFIX','.php');
