@@ -78,11 +78,16 @@
                     <span class="list-item-block">客服QQ</span>
                     <span class="list-item-block">主页地址</span>
                 </li>
-                {% if not (list) %}
+                {% if (list) %}
                 {% for  l in list %}
                 <li class="list-item clearfix">
-                    <span class="list-item-block"><cite>2600</cite> 元</span>
-                    <span class="list-item-block">4月22日</span>
+                    <span class="list-item-block">{{ l.name |raw }}</span>
+                    <span class="list-item-block">{{ l.ip |raw}}</span>
+                    <span class="list-item-block">{{ l.opentime |raw}}</span>
+                    <span class="list-item-block">{{ l.line |raw}}</span>
+                    <span class="list-item-block">{{ l.intro|raw }}</span>
+                    <span class="list-item-block">{{ l.qq|raw }}</span>
+                    <span class="list-item-block">{{ l.url|raw }}</span>
                 </li>
                 {% endfor %}
 {% else %}

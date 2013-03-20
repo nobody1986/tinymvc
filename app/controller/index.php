@@ -32,6 +32,7 @@ class Index_Controller extends Controller {
         );
         foreach($urls as $k => $url){
             $content=  file_get_contents($url);
+            $content = mb_convert_encoding($content, 'utf8','gb2312');
             $content=  str_replace("\n",' ', $content);
             $ret = preg_match_all($regexs[$k], $content,$matches);
             $data = array();
