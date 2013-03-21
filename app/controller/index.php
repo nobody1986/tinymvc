@@ -6,7 +6,7 @@ class Index_Controller extends Controller {
         $view = Core::viewFactory('index');
         $model = $this->model('sifu');
         $list = $model->getList();
-        $view->set('list',$list);
+        $view->set('lists',$list);
         $o = $view->render();
         $this->_response->write($o);
     }
@@ -25,13 +25,14 @@ class Index_Controller extends Controller {
          */
         $model = $this->model('sifu');
         $urls = array(
-            'http://81f.hao883.com/'
+            'http://81f.hao883.com/?jdfwkey=gwmgt2'
         );
         $regexs = array(
-            '#<tr[^>]*><td[^>]*>(.+?)</td>.+?<td[^>]*>(.+?)</td>.+?<td[^>]*>(.+?)</td>.+?<td[^>]*>(.+?)</td>.+?<td[^>]*>(.+?)</td>.+?<td[^>]*>(.+?)</td>.+?</tr>#i'
+            '#<tr[^>]*>.+?<td[^>]*>(.+?)</td>.+?<td[^>]*>(.+?)</td>.+?<td[^>]*>(.+?)</td>.+?<td[^>]*>(.+?)</td>.+?<td[^>]*>(.+?)</td>.+?<td[^>]*>(.+?)</td>.+?</tr>#i'
         );
+        Core::import('lib.toolkit');
         foreach($urls as $k => $url){
-            $content=  file_get_contents($url);
+            $content=  fetchurl($url);
             $content = mb_convert_encoding($content, 'utf8','gb2312');
             $content=  str_replace("\n",' ', $content);
             $ret = preg_match_all($regexs[$k], $content,$matches);

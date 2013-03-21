@@ -171,7 +171,7 @@ class Core {
         }
 
         $end_time = microtime(true);
-        if (defined('TINY_DEBUG')) {
+        if (defined('TINY_DEBUG') && TINY_DEBUG) {
             $time_cost = $end_time - $start_time;
             echo "The Page cost:{$time_cost} s.";
         }

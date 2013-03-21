@@ -1,7 +1,7 @@
 <?php
 /**
  * Description of blog
- *Ãû³ÆIP¿ª»úÊ±¼ä[ÔÂ/ÈÕ/Ê±]ÏßÂ·ÏêÏ¸°æ±¾½éÉÜ¿Í·şQQÖ÷Ò³µØÖ·
+ *ï¿½ï¿½ï¿½IPï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½[ï¿½ï¿½/ï¿½ï¿½/Ê±]ï¿½ï¿½Â·ï¿½ï¿½Ï¸ï¿½æ±¾ï¿½ï¿½ï¿½Ü¿Í·ï¿½QQï¿½ï¿½Ò³ï¿½ï¿½Ö·
  * @author hp1
  */
 class Sifu_Model extends Model{
@@ -26,6 +26,6 @@ class Sifu_Model extends Model{
     
     function getList($page=1,$num = 100){
         $db = $this->getSource();
-        return $db->findAll('id desc',array(($page - 1) * $num,$num));
+        return $db->findAll('id asc',array(($page - 1) * $num,$num));
     }
 }
