@@ -46,7 +46,7 @@ class Blog_Controller extends Controller {
             }
         }
 
-        $view = Core::viewFactory('v2ex.index');
+        $view = Core::viewFactory('blog.index');
         $model = $this->model('user');
         $isLogined = $model->isLogined();
         $view->set('isLogined', $isLogined);

@@ -8,6 +8,7 @@
 
         <link rel="stylesheet" href="/static/stylesheets/base.css" />
         <link rel="stylesheet" href="/static/stylesheets/page.css" />
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
         <!--[if lt IE 9]>
         <script type="text/javascript">
         // html5shiv MIT @rem remysharp.com/html5-enabling-script
@@ -71,32 +72,42 @@
 
             <div id="gridlist" class="grid grid-20">
                 <div id="content" class="grid grid-20 first">
-                    <ul class="list list-thumb">
-                        <li class="list-item list-item-title clearfix">
-                            <span class="list-item-content-small">名称</span>
-                            <span class="list-item-content-small">IP</span>
-                            <span class="list-item-content-small">开机时间[月/日/时]</span>
-                            <span class="list-item-content-small">线路详细</span>
-                            <span class="list-item-content-small">版本介绍</span>
-                            <span class="list-item-content-small">客服QQ</span>
-                            <span class="list-item-content-small">主页地址</span>
-                        </li>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>名称</th>
+                                <th>IP</th>
+                                <th>开机时间[月/日/时]</th>
+                                <th>线路详细</th>
+                                <th>版本介绍</th>
+                                <th>客服QQ</th>
+                                <th>主页地址</th>
+                            </tr>
+                        </thead>
                         {% if (lists) %}
-                        {% for  l in lists %}
-                        <li class="list-item clearfix">
-                            <span class="list-item-content-small">{{ l.name |raw }}</span>
-                            <span class="list-item-content-small">{{ l.ip |raw}}</span>
-                            <span class="list-item-content-small">{{ l.opentime |raw}}</span>
-                            <span class="list-item-content-small">{{ l.line |raw}}</span>
-                            <span class="list-item-content-small">{{ l.intro|raw }}</span>
-                            <span class="list-item-content-small">{{ l.qq|raw }}</span>
-                            <span class="list-item-content-small">{{ l.url|raw }}</span>
-                        </li>
+                        <tbody>
+                            {% for  l in lists %}
+                            <tr>
+                                <td>{{ l.name |raw }}</td>
+                                <td>{{ l.ip |raw}}</td>
+                                <td>{{ l.opentime |raw}}</td>
+                                <td>{{ l.line |raw}}</td>
+                                <td>{{ l.intro|raw }}</td>
+                                <td>{{ l.qq|raw }}</td>
+                                <td>{{ l.url|raw }}</td>
+                            </tr>
+                        </tbody>
                         {% endfor %}
                         {% else %}
-                        暂无内容。。。。。。
+                        <tbody>
+                            <tr >
+                                <td colspan="7">
+                                    暂无内容。。。。。。
+                                </td>
+                            </tr>
+                        </tbody>
                         {% endif  %}
-                    </ul> <!-- .list -->
+                    </table> <!-- .list -->
 
                     <!--<div class="pagenav clearfix">
                         <a class="pagenav-cell" href="#">上一页</a>
@@ -193,7 +204,8 @@
 
             </div> <!-- .container -->
 
-            <script type="text/javascript" src="/static/javascripts/jquery-1.7.1.min.js"></script>
+            <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+            <script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
             <script type="text/javascript" src="/static/javascripts/plugins.js"></script>
             <script type="text/javascript" src="/static/javascripts/page.js"></script>
     </body>

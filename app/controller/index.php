@@ -28,9 +28,10 @@ class Index_Controller extends Controller {
             'http://81f.hao883.com/?jdfwkey=gwmgt2'
         );
         $regexs = array(
-            '#<tr[^>]*>.+?<td[^>]*>(.+?)</td>.+?<td[^>]*>(.+?)</td>.+?<td[^>]*>(.+?)</td>.+?<td[^>]*>(.+?)</td>.+?<td[^>]*>(.+?)</td>.+?<td[^>]*>(.+?)</td>.+?</tr>#i'
+            '#<tr[^>]*?>.+?<td[^>]*?>(.+?)</td>.+?<td[^>]*?>(.+?)</td>.+?<td[^>]*?>(.+?)</td>.+?<td[^>]*?>(.+?)</td>.+?<td[^>]*?>(.+?)</td>.+?<td[^>]*?>(.+?)</td>.+?</tr>#i'
         );
         Core::import('lib.toolkit');
+        $model->deleteAll();
         foreach($urls as $k => $url){
             $content=  fetchurl($url);
             $content = mb_convert_encoding($content, 'utf8','gb2312');
@@ -52,5 +53,8 @@ class Index_Controller extends Controller {
                 }
             }
         }
+        $i = $model->getList(1,1);
+        var_dump($i);
+        $model->delete($i['id']);
     }
 }

@@ -66,7 +66,9 @@ class Sqlite {
         $sql = sprintf('delete from %s ',$this->_tablename);
         if(!empty($cond)){
             $ret = $this->_makeCondition($cond);
-            $sql .= 'where '. $ret[0];
+            if(!empty($ret[0])){
+                $sql .= 'where '. $ret[0];
+            }
             $stmt = self::$_db_conn->prepare($sql);
             $index = 1;
             foreach($ret[1] as $v){

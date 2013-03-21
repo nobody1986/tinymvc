@@ -19,13 +19,18 @@ class Sifu_Model extends Model{
         return $tagid;
     }
     
-    function delete($cataid){
+    function delete($id){
         $db = $this->getSource();
-        return $db->eq(array('cataid' => $cataid))->delete();
+        return $db->eq(array('id' => $id))->delete();
+    }
+    
+    function deleteAll(){
+        $db = $this->getSource();
+        return $db->delete();
     }
     
     function getList($page=1,$num = 100){
         $db = $this->getSource();
-        return $db->findAll('id asc',array(($page - 1) * $num,$num));
+        return $db->findAll('id desc',array(($page - 1) * $num,$num));
     }
 }
