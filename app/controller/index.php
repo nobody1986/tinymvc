@@ -25,16 +25,16 @@ class Index_Controller extends Controller {
          */
         $model = $this->model('sifu');
         $urls = array(
-            'http://81f.hao883.com/?jdfwkey=gwmgt2'
+            'http://pk999.tuan917.com'
         );
         $regexs = array(
-            '#<tr[^>]*?>.+?<td[^>]*?>(.+?)</td>.+?<td[^>]*?>(.+?)</td>.+?<td[^>]*?>(.+?)</td>.+?<td[^>]*?>(.+?)</td>.+?<td[^>]*?>(.+?)</td>.+?<td[^>]*?>(.+?)</td>.+?</tr>#i'
+            '#<dl[^>]*?>[^<]+?<dd[^>]*?>([^<]+?)</dd>.+?<dd[^>]*?>(.+?)</dd>.+?<dd[^>]*?>(.+?)</dd>.+?<dd[^>]*?>(.+?)</dd>.+?<dd[^>]*?>(.+?)</dd>.+?<dd[^>]*?>(.+?)</dd>.+?<dd[^>]*?>(.+?)</dd>.*?</dl>#i'
         );
         Core::import('lib.toolkit');
         $model->deleteAll();
         foreach($urls as $k => $url){
             $content=  fetchurl($url);
-            $content = mb_convert_encoding($content, 'utf8','gb2312');
+            $content = mb_convert_encoding($content, 'utf8','gbk');
             $content=  str_replace("\n",' ', $content);
             $ret = preg_match_all($regexs[$k], $content,$matches);
             $data = array();
@@ -53,8 +53,7 @@ class Index_Controller extends Controller {
                 }
             }
         }
-        $i = $model->getList(1,1);
-        var_dump($i);
-        $model->delete($i['id']);
+//        $i = $model->getList(1,1);
+//        $model->delete($i['id']);
     }
 }

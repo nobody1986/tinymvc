@@ -31,6 +31,6 @@ class Sifu_Model extends Model{
     
     function getList($page=1,$num = 100){
         $db = $this->getSource();
-        return $db->findAll('id desc',array(($page - 1) * $num,$num));
+        return $db->findAll('id asc',array(($page - 1) * $num,$num));
     }
 }
