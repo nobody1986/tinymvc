@@ -25,10 +25,10 @@ class Index_Controller extends Controller {
          */
         $model = $this->model('sifu');
         $urls = array(
-            'http://pk999.tuan917.com'
+            'http://pk999.tuan917.com/?jdfwkey=48cji'
         );
         $regexs = array(
-            '#<dl[^>]*?>[^<]+?<dd[^>]*?>([^<]+?)</dd>.+?<dd[^>]*?>(.+?)</dd>.+?<dd[^>]*?>(.+?)</dd>.+?<dd[^>]*?>(.+?)</dd>.+?<dd[^>]*?>(.+?)</dd>.+?<dd[^>]*?>(.+?)</dd>.+?<dd[^>]*?>(.+?)</dd>.*?</dl>#i'
+            '#\'[^<]*?<dl[^>]*?>[^<]*?<dd[^>]*?>([^<]*?)</dd>[^<]*?<dd[^>]*?>([^<]*?)</dd>[^<]*?<dd[^>]*?>([^<]*?)</dd>[^<]*?<dd[^>]*?>([^<]*?)</dd>[^<]*?<dd[^>]*?>([^<]*?)</dd>[^<]*?<dt[^>]*?>([^<]*?)</dt>[^<]*?</dl>\'#i'
         );
         Core::import('lib.toolkit');
         $model->deleteAll();
@@ -39,6 +39,7 @@ class Index_Controller extends Controller {
             $ret = preg_match_all($regexs[$k], $content,$matches);
             $data = array();
             if($ret > 0){
+                var_dump($matches);
                 foreach($matches[1] as $k1=>$v1){
                     $data = array(
                         'name' => $v1,
