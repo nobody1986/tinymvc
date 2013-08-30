@@ -49,6 +49,9 @@ class Core {
             case 'normal' :
                 return (new Request());
                 break;
+            case 'cc' :
+                return (new Request());
+                break;
             case 'react' :
                 $request = new ReactRequest();
                 $request->setRequestHandler($requestHandler);
@@ -98,6 +101,8 @@ class Core {
             case 'normal' :
                 self::$TINY_CU_RESPONSE = new Response($router->getCaller(), $request);
                 break;
+            case 'cc' :
+                return new ReactResponse($router->getCaller(), $request);
             case 'react' :
                 return new ReactResponse($router->getCaller(), $request);
                 break;
@@ -115,6 +120,15 @@ class Core {
                 self::dispatch(self::$TINY_CU_ROUTER, self::$TINY_CU_REQUEST);
                 $output = &self::$TINY_CU_RESPONSE->output();
                 self::$TINY_CU_RESPONSE->write($output);
+                break;
+            case 'cc' :
+                require_once (TINY_CORE_DIR . 'cc/connection.php');
+                require_once (TINY_CORE_DIR . 'cc/server.php');
+                require_once (TINY_CORE_DIR . 'cc/httpserver.php');
+                require_once (TINY_CORE_DIR . 'cc/ccrequest.php');
+                require_once (TINY_CORE_DIR . 'cc/ccresponse.php');
+
+                HttpServer.start();
                 break;
             case 'react' :
                 require_once (TINY_CORE_DIR . 'reactrequest.php');

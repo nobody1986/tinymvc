@@ -5,8 +5,8 @@ class Connection{
 		$this->_socket = $socket;
 	}	
 
-	function read($len){
-		return socket_read($this->_socket, $len); 
+	function read($len,$mod=PHP_BINARY_READ){
+		return socket_read($this->_socket, $len,$mod); 
 	}
 
 	function write($str){

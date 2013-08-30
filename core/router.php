@@ -13,9 +13,9 @@ class Router {
         $this->_action = $action;
     }
 
-    function getInstance(){
+    function getInstance($request = null){
         if(empty($this->_instance)){
-            $this->_instance = new $this->_controller(Tiny_Core::$TINY_CU_REQUEST);
+            $this->_instance = new $this->_controller(empty($request)?Tiny_Core::$TINY_CU_REQUEST:$request);
         }
         return $this->_instance;
     }
