@@ -40,6 +40,11 @@ class Core {
         return array($request, $info_parsed);
     }
 
+    static function ccInit() {
+        self::setIncludePath();
+
+    }
+
     /**
      * @return Request
      */
@@ -50,7 +55,7 @@ class Core {
                 return (new Request());
                 break;
             case 'cc' :
-                return (new Request());
+                return (new CcRequest($requestHandler));
                 break;
             case 'react' :
                 $request = new ReactRequest();
@@ -127,7 +132,7 @@ class Core {
                 require_once (TINY_CORE_DIR . 'cc/httpserver.php');
                 require_once (TINY_CORE_DIR . 'cc/ccrequest.php');
                 require_once (TINY_CORE_DIR . 'cc/ccresponse.php');
-
+                self::ccInit();
                 HttpServer.start();
                 break;
             case 'react' :
@@ -275,5 +280,3 @@ class Core {
     }
 
 }
-
-?>
