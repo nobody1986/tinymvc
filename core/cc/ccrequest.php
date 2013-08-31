@@ -19,8 +19,11 @@ class CcRequest extends Request {
 	protected $action;
 	
 	protected $_requestHandler;
+
+	protected $_header;
 	
-    function __construct() {
+    function __construct($header) {
+    	$this->_header = $header;
     }
 	
 	function setRequestHandler($requestHandler){
@@ -36,7 +39,7 @@ class CcRequest extends Request {
 	}
 	
 	function parseHeader(){
-		$path = $this->_requestHandler->getPath();
+		$path = $this->_header['path'];
 		$info_parsed = array();
 			$slice = explode('/', trim($path));
 			$this->controller = empty($slice[1]) ? TINY_DEFAULT_CONTROLLER : trim($slice[1]);

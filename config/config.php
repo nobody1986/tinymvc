@@ -28,4 +28,4 @@ define('TINY_CONTROLLER_DIRNAME','controller');
 define('TINY_VIEW_DIRNAME','view');
 define('TINY_TMP_DIRNAME','tmp');
 
-define('TINY_RUN_MODEL','normal');
+define('TINY_RUN_MODEL','cc');

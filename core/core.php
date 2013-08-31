@@ -107,7 +107,7 @@ class Core {
                 self::$TINY_CU_RESPONSE = new Response($router->getCaller(), $request);
                 break;
             case 'cc' :
-                return new ReactResponse($router->getCaller(), $request);
+                return new CcResponse($router->getCaller(), $request);
             case 'react' :
                 return new ReactResponse($router->getCaller(), $request);
                 break;
@@ -133,7 +133,8 @@ class Core {
                 require_once (TINY_CORE_DIR . 'cc/ccrequest.php');
                 require_once (TINY_CORE_DIR . 'cc/ccresponse.php');
                 self::ccInit();
-                HttpServer.start();
+                $hs = new HttpServer();
+                $hs->start();
                 break;
             case 'react' :
                 require_once (TINY_CORE_DIR . 'reactrequest.php');

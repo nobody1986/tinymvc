@@ -2,11 +2,6 @@
 
 
 
-require "../request.php";
-require "../response.php";
-require "server.php";
-require "connection.php";
-
 class HttpServer extends Server{
 
 
@@ -19,7 +14,7 @@ class HttpServer extends Server{
 		if( $m == "get" || $m == 'pos'){
 			$method_split = explode(" ",$method);
 			$head['method'] = strtolower($method_split[0]);
-			$head['url'] = ($method_split[1]);
+			$head['path'] = ($method_split[1]);
 			$head['protocol'] = trim($method_split[2]);
 		}
 		$c->read(1024,PHP_NORMAL_READ);
@@ -40,11 +35,16 @@ class HttpServer extends Server{
 		
 		$head = $this->pasrseHead($c);
 		$request = Core::requestFactory($head);
-		$c->write("HTTP/1.0 200 OK\r\nServer: Microsoft-IIS/5.0\r\nDate: Thu,08 Mar 200707:17:51 GMT\r\nConnection: Keep-Alive \r\nContent-Length: 5\r\nContent-Type: text/html\r\nCache-control: private\r\n\r\nHello");
+		$request->parseHeader();
+        $info_parsed = array();
+        $info_parsed['controller'] = $request->getController();
+        $info_parsed['action'] = $request->getAction();
+		$router = new Router($info_parsed['controller'], $info_parsed['action']);
+		$response = Core::dispatch($router, $request);
+
+		$c->write($response->output());
 		$c->close();
 	}
 }
 
 
-$h = new HttpServer();
-$h->start();

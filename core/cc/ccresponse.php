@@ -8,6 +8,13 @@ class CcResponse extends Response {
     protected $_caller;
     protected $_request;
     protected $_responseHandler;
+    protected $_code = 200;
+    protected $_protocol = 'HTTP/1.0';
+    protected $_output = '';
+    protected $_response = array(
+        'Server' => 'Tiny',
+        'Content-Type' => 'text/html',
+        );
     function __construct(Array $caller,Request $request) {
     	$className = ucfirst($caller[0]) . '_Controller';
 		if (!class_exists($className)) {
@@ -21,24 +28,33 @@ class CcResponse extends Response {
     }
     
     function redirect($url){
-        header("Location: $url");
+        $this->_code = 301;
+        $this->_response['Location'] = $url;
     }
     
-    function setResponseHandler($response){
-    	$this->_responseHandler = $response;
-    }
     
-    function header($head){
-    	$this->_responseHandler->writeHead(200, array('Content-Type' => 'text/plain'));
+    function setHeader($head){
+    	$this->_response = array_merge($this->_response,$head);
     }
     
     function &output(){
+        try{
        	$output = call_user_func($this->_caller);
-        return $output;
+       }catch(Tiny_Exception $e){
+            $output = '';
+            $This->_code = 500;
+       }
+        $output = $this->_output . $output;
+        $this->_response['Content_Length'] = strlen($output);
+        $this->_response['Date'] = date('D, d M Y H:i:s e');
+        $header = "{$this->_protocol} {$this->_code} OK\r\n";
+        $header .= implode("\r\n", $this->_response);
+        $header .= "\r\n";
+        return $header . $output;
     }
 	
 	function write($str){
-		$this->_responseHandler->write($str);
+		$this->_output .= $str;
 	}
     
 }
