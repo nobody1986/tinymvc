@@ -16,15 +16,20 @@ class CcResponse extends Response {
         'Content-Type' => 'text/html',
         );
     function __construct(Array $caller,Request $request) {
-    	$className = ucfirst($caller[0]) . '_Controller';
-		if (!class_exists($className)) {
-			Core::import(TINY_CONTROLLER_DIRNAME . '.' . strtolower($caller[0]));
-		}
-		$tmp_ref = new ReflectionClass($className);
-        $controller = $tmp_ref -> newInstanceArgs(array($request,$this));
-        $caller[0] = $controller;
-        $this->_caller = $caller;
-        $this->_request = $request;
+        try{
+        	$className = ucfirst($caller[0]) . '_Controller';
+    		if (!class_exists($className)) {
+    			Core::import(TINY_CONTROLLER_DIRNAME . '.' . strtolower($caller[0]));
+    		}
+    		$tmp_ref = new ReflectionClass($className);
+            $controller = $tmp_ref -> newInstanceArgs(array($request,$this));
+            $caller[0] = $controller;
+            $this->_caller = $caller;
+            $this->_request = $request;
+        }catch(Tiny_Exception $e){
+            $output = '';
+            $This->_code = 500;
+       }
     }
     
     function redirect($url){
