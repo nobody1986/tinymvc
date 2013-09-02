@@ -87,6 +87,7 @@ class Core {
     }
 
     static function routerFactory(Array $router_info) {
+        
         if (isset(self::$TINY_ROUTER[$router_info['controller']])) {
             if (isset(self::$TINY_ROUTER[$router_info['controller']][$router_info['action']])) {
                 return self::$TINY_ROUTER[$router_info['controller']][$router_info['action']];

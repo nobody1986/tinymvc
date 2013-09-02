@@ -29,3 +29,8 @@ define('TINY_VIEW_DIRNAME','view');
 define('TINY_TMP_DIRNAME','tmp');
 
 define('TINY_RUN_MODEL','cc');
+
+$Routers = array(
+	'/hello'=>array('default','index'),
+);
+
