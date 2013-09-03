@@ -20,11 +20,7 @@ class Core {
     static function init($requestHandler = null, $responseHandler = null) {
         self::setIncludePath();
         $request = self::requestFactory($requestHandler);
-        $request->parseHeader();
-        $info_parsed = array();
-        $info_parsed['controller'] = $request->getController();
-        $info_parsed['action'] = $request->getAction();
-        self::$TINY_CU_ROUTER = self::routerFactory($info_parsed);
+        self::$TINY_CU_ROUTER = self::routerFactory($request->getPath());
         self::$TINY_CU_REQUEST = $request;
         return self::$TINY_CU_ROUTER;
     }
@@ -86,20 +82,21 @@ class Core {
         return self::$TINY_CONTROLLER[$controller];
     }
 
-    static function routerFactory(Array $router_info) {
+    static function routerFactory($path) {
         
-        if (isset(self::$TINY_ROUTER[$router_info['controller']])) {
-            if (isset(self::$TINY_ROUTER[$router_info['controller']][$router_info['action']])) {
-                return self::$TINY_ROUTER[$router_info['controller']][$router_info['action']];
-            } else {
-                self::$TINY_ROUTER[$router_info['controller']] = array();
-            }
-        } else {
-            self::$TINY_ROUTER[$router_info['controller']] = array();
-            self::$TINY_ROUTER[$router_info['controller']][$router_info['action']] = array();
-        }
-        self::$TINY_ROUTER[$router_info['controller']][$router_info['action']] = new Router($router_info['controller'], $router_info['action']);
-        return self::$TINY_ROUTER[$router_info['controller']][$router_info['action']];
+//        if (isset(self::$TINY_ROUTER[$router_info['controller']])) {
+//            if (isset(self::$TINY_ROUTER[$router_info['controller']][$router_info['action']])) {
+//                return self::$TINY_ROUTER[$router_info['controller']][$router_info['action']];
+//            } else {
+//                self::$TINY_ROUTER[$router_info['controller']] = array();
+//            }
+//        } else {
+//            self::$TINY_ROUTER[$router_info['controller']] = array();
+//            self::$TINY_ROUTER[$router_info['controller']][$router_info['action']] = array();
+//        }
+//        self::$TINY_ROUTER[$router_info['controller']][$router_info['action']] = new Router($router_info['controller'], $router_info['action']);
+//        return self::$TINY_ROUTER[$router_info['controller']][$router_info['action']];
+        return new Router($path);
     }
 
     static function dispatch(Router $router, Request $request) {
