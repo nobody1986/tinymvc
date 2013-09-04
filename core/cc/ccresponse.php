@@ -29,6 +29,7 @@ class CcResponse extends Response {
             $caller[0] = $controller;
             $this->_caller = $caller;
             $this->_request = $request;
+//            var_dump($caller);
         } catch (Tiny_Exception $e) {
             $output = '';
             $This->_code = 500;
@@ -42,6 +43,29 @@ class CcResponse extends Response {
 
     function setHeader($head) {
         $this->_response = array_merge($this->_response, $head);
+    }
+    
+    function getMimeType($path) {
+//        CORE::import("core.mime");
+        global $mime_types;
+        $pos = strrpos($path, '.');
+        $extend = substr($path,$pos + 1);
+//        var_dump($mime_types);
+        if(isset($mime_types[$extend])){
+            return $mime_types[$extend];
+        }
+    }
+    
+    function setMimeTypeByPath($path) {
+        $mime = $this->getMimeType($path);
+//        var_dump($mime);
+        if(!empty($mime)){
+            $this->_response['Content-Type'] = $mime;
+        }
+    }
+    
+    function setCode($code) {
+        $this->_code = $code;
     }
 
     function output() {

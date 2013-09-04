@@ -33,5 +33,18 @@ define('TINY_RUN_MODEL', 'cc');
 
 $Routers = array(
     '/hello' => array('default', 'index'),
+    '/static/*' => array('default', 'statichandle'),
+    '/favicon.ico' => array('default', 'statichandle'),
+);
+
+ $mime_types = array(
+	'jpg' => 'image/jpeg',
+	'jpeg' => 'image/jpeg',
+	'png' => 'image/png',
+	'gif' => 'image/gif',
+	'css' => 'text/css',
+	'js' => 'text/javascript',
+	'xml' => 'text/xml',
+	'swf' => 'application/x-shockwave-flash',
 );
 

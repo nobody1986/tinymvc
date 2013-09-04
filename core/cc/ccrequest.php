@@ -24,6 +24,7 @@ class CcRequest extends Request {
     }
     
     function getPath() {
+//        var_dump($this->_header['path']);
         return $this->_header['path'];
     }
 
