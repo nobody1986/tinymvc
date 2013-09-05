@@ -23,6 +23,13 @@ class HttpServer extends Server {
             $line_split = explode(": ", $line);
 
             $head[$line_split[0]] = trim($line_split[1]);
+            if (isset($head[$line_split[0]])) {
+                if (is_array($head[$line_split[0]])) {
+                    $head[$line_split[0]] [] = $line_split[1];
+                } else {
+                    $head[$line_split[0]] = array($head[$line_split[0]], $line_split[1]);
+                }
+            }
         }
         //var_dump($method);
         return $head;

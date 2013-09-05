@@ -11,7 +11,7 @@ class CcResponse extends Response {
     protected $_request;
     protected $_responseHandler;
     protected $_code = 200;
-    protected $_protocol = 'HTTP/1.0';
+    protected $_protocol = 'HTTP/1.1';
     protected $_output = '';
     protected $_response = array(
         'Server' => 'Tiny',
@@ -86,6 +86,10 @@ class CcResponse extends Response {
 
     function write($str) {
         $this->_output .= $str;
+    }
+    
+    function setCookie(){
+        
     }
 
 }
