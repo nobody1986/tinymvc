@@ -24,6 +24,7 @@ class HttpServer extends Server {
 
             $head[$line_split[0]] = trim($line_split[1]);
         }
+        //var_dump($method);
         return $head;
     }
 
@@ -33,9 +34,9 @@ class HttpServer extends Server {
         $request = Core::requestFactory($head);
         $router = new Router($request->getPath());
         $response = Core::dispatch($router, $request);
-
-        $c->write($response->output());
-        $c->close();
+        return $response->output();
+        //$c->write($response->output());
+        //$c->close();
     }
 
 }
