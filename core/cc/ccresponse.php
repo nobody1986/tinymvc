@@ -30,7 +30,6 @@ class CcResponse extends Response {
             $caller[0] = $controller;
             $this->_caller = $caller;
             $this->_request = $request;
-//            var_dump($caller);
         } catch (Tiny_Exception $e) {
             $output = '';
             $This->_code = 500;
@@ -42,16 +41,19 @@ class CcResponse extends Response {
         $this->_response['Location'] = $url;
     }
 
+    function notFound($content = '') {
+        $this->_code = 404;
+        $this->write($content);
+    }
+
     function setHeader($head) {
         $this->_response = array_merge($this->_response, $head);
     }
     
     function getMimeType($path) {
-//        CORE::import("core.mime");
         global $mime_types;
         $pos = strrpos($path, '.');
         $extend = substr($path,$pos + 1);
-//        var_dump($mime_types);
         if(isset($mime_types[$extend])){
             return $mime_types[$extend];
         }
@@ -59,7 +61,6 @@ class CcResponse extends Response {
     
     function setMimeTypeByPath($path) {
         $mime = $this->getMimeType($path);
-//        var_dump($mime);
         if(!empty($mime)){
             $this->_response['Content-Type'] = $mime;
         }
@@ -79,10 +80,25 @@ class CcResponse extends Response {
         $output = $this->_output . $output;
         $this->_response['Content_Length'] = strlen($output);
         $this->_response['Date'] = date('D, d M Y H:i:s e');
+        $header_array = array();
+        foreach($this->_response as $key => $value){
+            $header_array []= "{$key}: {$value}";
+        }
         $header = "{$this->_protocol} {$this->_code} OK\r\n";
-        $header .= implode("\r\n", $this->_response);
+        $header .= implode("\r\n", $header_array);
         foreach ($this->_cookies as $key => $value) {
-            $header .= sprint("Set-Cookie: \r\n");
+            $cookie_str = array();
+            if(!empty($value['expires'])){
+                $value['expire'] = date('D, d M Y H:i:s e',$value['expire'])
+                $cookie_str []= "expires={$value['expire']}";
+            }
+            if(!empty($value['path'])){
+                $cookie_str []= "path={$value['path']}";
+            }
+            if(!empty($value['domain'])){
+                $cookie_str []= "domain={$value['domain']}";
+            }
+            $header .= sprint("Set-Cookie: %s=%s; %s\r\n",$key,$value['value'],implode("; ",$cookie_str));
         }
         $header .= "\r\n\r\n";
         return $header . $output;
@@ -94,8 +110,9 @@ class CcResponse extends Response {
   
     /**
      * Set-Cookie:H_PS_PSSID=1437_2976_2980_3090_3225; path=/; domain=.baidu.com
+     * Set-Cookie:toolid=4tQjrluOK1x6u5%2b1KHZ%2fGEyOutgEiuop; domain=chinaz.com; expires=Sat, 07-Sep-2013 08:43:53 GMT; path=/
      */
-    function setCookie($key,$value,$expire,$path,$domain){
+    function setCookie($key,$value,$expire=null,$path=null,$domain=null){
         $this->_cookies[$key] = array(
             'value' => $value,
             'expire' => $expire,
