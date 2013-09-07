@@ -13,6 +13,7 @@ class CcResponse extends Response {
     protected $_code = 200;
     protected $_protocol = 'HTTP/1.1';
     protected $_output = '';
+    protected $_cookies = array();
     protected $_response = array(
         'Server' => 'Tiny',
         'Content-Type' => 'text/html',
@@ -80,6 +81,9 @@ class CcResponse extends Response {
         $this->_response['Date'] = date('D, d M Y H:i:s e');
         $header = "{$this->_protocol} {$this->_code} OK\r\n";
         $header .= implode("\r\n", $this->_response);
+        foreach ($this->_cookies as $key => $value) {
+            $header .= sprint("Set-Cookie: \r\n");
+        }
         $header .= "\r\n\r\n";
         return $header . $output;
     }
@@ -87,9 +91,17 @@ class CcResponse extends Response {
     function write($str) {
         $this->_output .= $str;
     }
-    
-    function setCookie(){
-        
+  
+    /**
+     * Set-Cookie:H_PS_PSSID=1437_2976_2980_3090_3225; path=/; domain=.baidu.com
+     */
+    function setCookie($key,$value,$expire,$path,$domain){
+        $this->_cookies[$key] = array(
+            'value' => $value,
+            'expire' => $expire,
+            'path' => $path,
+            'domain' => $domain,
+        );
     }
 
 }
