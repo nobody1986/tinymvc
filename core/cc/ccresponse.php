@@ -89,7 +89,7 @@ class CcResponse extends Response {
         foreach ($this->_cookies as $key => $value) {
             $cookie_str = array();
             if(!empty($value['expires'])){
-                $value['expire'] = date('D, d M Y H:i:s e',$value['expire'])
+                $value['expire'] = date('D, d M Y H:i:s e',$value['expire']);
                 $cookie_str []= "expires={$value['expire']}";
             }
             if(!empty($value['path'])){
