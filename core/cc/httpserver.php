@@ -10,7 +10,8 @@ class HttpServer extends Server {
         if ($m == "get" || $m == 'pos') {
             $method_split = explode(" ", $method);
             $head['method'] = strtolower($method_split[0]);
-            $head['path'] = ($method_split[1]);
+            $url = explode('?',$method_split[1]);
+            
             $head['protocol'] = trim($method_split[2]);
         }
         $c->read(1024, PHP_NORMAL_READ);

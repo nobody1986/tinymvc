@@ -43,5 +43,9 @@ class CcRequest extends Request {
 //        var_dump($this->_header['path']);
         return $this->_header['path'];
     }
+    
+    function get($key) {
+        return isset($this->_header[$key])?$this->_header[$key]:null;
+    }
 
 }

@@ -7,7 +7,7 @@ class Server {
 
     protected $_options = array(
         'host' => '0.0.0.0',
-        'port' => 8080,
+        'port' => 80,
     );
 
     function __construct($options = array()) {
@@ -35,7 +35,8 @@ class Server {
             $writefds = array();
          
             //选择一个连接，获取读、写连接通道
-            if (socket_select($readfds, $writefds, $e = null, $t=0) < 1)
+            $t = 0;
+            if (socket_select($readfds, $writefds, $e, $t) < 1)
             {   
                 continue;
             }
