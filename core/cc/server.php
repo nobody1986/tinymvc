@@ -7,7 +7,7 @@ class Server {
 
     protected $_options = array(
         'host' => '0.0.0.0',
-        'port' => 80,
+        'port' => 8080,
     );
 
     function __construct($options = array()) {

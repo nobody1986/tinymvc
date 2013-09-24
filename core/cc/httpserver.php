@@ -11,6 +11,21 @@ class HttpServer extends Server {
             $method_split = explode(" ", $method);
             $head['method'] = strtolower($method_split[0]);
             $url = explode('?',$method_split[1]);
+            if(!empty($url[1])){
+                $head['query_string'] = $url[1];
+                $head['get_params'] = array();
+                $args = explode('&',$url[1]);
+                foreach($args as $v){
+                    $v = explode('=', $v);
+                    if(!empty($v[1])){
+                        $head['get_params'][$v[0]] = $v[1];
+                    }
+                }
+            }else{
+                $head['query_string'] = '';
+                $head['get_params'] = array();
+            }
+            $head['path'] = $url[0];
             
             $head['protocol'] = trim($method_split[2]);
         }

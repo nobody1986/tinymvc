@@ -45,7 +45,11 @@ class CcRequest extends Request {
     }
     
     function get($key) {
-        return isset($this->_header[$key])?$this->_header[$key]:null;
+        return isset($this->_header['get_params'][$key])?$this->_header['get_params'][$key]:null;
+    }
+
+    function post($key) {
+        return isset($this->_header['post_params'][$key])?$this->_header['post_params'][$key]:null;
     }
 
 }
