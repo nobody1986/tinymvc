@@ -4,6 +4,9 @@ class HttpServer extends Server {
 
     function pasrseHead($c) {
         $head = array();
+        $head['client_ip'] = $c->getClientIp();
+        $head['client_port'] = $c->getClientPort();
+        
         $method = $c->read(1024, PHP_NORMAL_READ);
         $m = substr($method, 0, 3);
         $m = strtolower($m);
@@ -37,17 +40,16 @@ class HttpServer extends Server {
                 break;
             }
             $line_split = explode(": ", $line);
-
-            $head[$line_split[0]] = trim($line_split[1]);
             if (isset($head[$line_split[0]])) {
                 if (is_array($head[$line_split[0]])) {
-                    $head[$line_split[0]] [] = $line_split[1];
+                    $head[$line_split[0]] []= $line_split[1];
                 } else {
                     $head[$line_split[0]] = array($head[$line_split[0]], $line_split[1]);
                 }
+            }else{
+                $head[$line_split[0]] = trim($line_split[1]);
             }
         }
-        //var_dump($method);
         return $head;
     }
 
@@ -58,8 +60,6 @@ class HttpServer extends Server {
         $router = new Router($request->getPath());
         $response = Core::dispatch($router, $request);
         return $response->output();
-        //$c->write($response->output());
-        //$c->close();
     }
 
 }

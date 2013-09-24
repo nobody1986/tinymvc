@@ -19,11 +19,13 @@ class CcRequest extends Request {
         $this->_header = $header;
         $this->_cookies = array();
         foreach ($header as $key => $value) {
-            if (strtolower($key) == 'set-cookie') {
+            if (strtolower($key) == 'cookie') {
                 $value = explode(';', $value);
-                $value = trim($value[0]);
-                $value = explode('=', $value);
-                $this->_cookies[$value[0]] = $value[1];
+                foreach($value as $l){
+                    $l = explode('=', $l);
+                    $l[0] = trim($l[0]);
+                    $this->_cookies[$l[0]] = trim($l[1]);
+                }
             }
         }
     }
@@ -33,6 +35,14 @@ class CcRequest extends Request {
             return null;
         }
         return $this->_cookies[$key];
+    }
+    
+    function getClientIp() {
+        return $this->_header['client_ip'];
+    }
+    
+    function getServerIp() {
+        return '127.0.0.1';
     }
 
     function setRequestHandler($requestHandler) {

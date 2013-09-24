@@ -38,7 +38,7 @@ class OAuth
             'client_id' => self::$client_id,
             'redirect_uri' => $redirect_uri,
             'response_type' => $response_type,
-            'wap' => $type
+            'wap' => $wap
         );
         return self::$authorizeURL.'?'.http_build_query($params);
     }
@@ -89,9 +89,9 @@ class OAuth
     /**
      * 验证授权是否有效
      */
-    public static function checkOAuthValid()
+    public static function checkOAuthValid($session)
     {
-        $r = json_decode(Tencent::api('user/info'), true);
+        $r = json_decode(Tencent::api('user/info',$session), true);
         if ($r['data']['name']) {
             return true;
         } else {
@@ -136,26 +136,26 @@ class Tencent
      * @param $multi 图片信息
      * @return string
      */
-    public static function api($command, $params = array(), $method = 'GET', $multi = false)
+    public static function api($command, $session,$params = array(), $method = 'GET', $multi = false)
     {
-        if (isset($_SESSION['t_access_token'])) {//OAuth 2.0 方式
+        if (isset($session['t_access_token'])) {//OAuth 2.0 方式
             //鉴权参数
-            $params['access_token'] = $_SESSION['t_access_token'];
+            $params['access_token'] = $session['t_access_token'];
             $params['oauth_consumer_key'] = OAuth::$client_id;
-            $params['openid'] = $_SESSION['t_openid'];
+            $params['openid'] = $session['t_openid'];
             $params['oauth_version'] = '2.a';
-            $params['clientip'] = Common::getClientIp();
+            $params['clientip'] = $session['client_ip'];
             $params['scope'] = 'all';
             $params['appfrom'] = 'php-sdk2.0beta';
             $params['seqid'] = time();
-            $params['serverip'] = $_SERVER['SERVER_ADDR'];
+            $params['serverip'] = $session['server_ip'];
             
             $url = self::$apiUrlHttps.trim($command, '/');
-        } elseif (isset($_SESSION['t_openid']) && isset($_SESSION['t_openkey'])) {//openid & openkey方式
+        } elseif (isset($session['t_openid']) && isset($session['t_openkey'])) {//openid & openkey方式
             $params['appid'] = OAuth::$client_id;
-            $params['openid'] = $_SESSION['t_openid'];
-            $params['openkey'] = $_SESSION['t_openkey'];
-            $params['clientip'] = Common::getClientIp();
+            $params['openid'] = $session['t_openid'];
+            $params['openkey'] = $session['t_openkey'];
+            $params['clientip'] =  $session['client_ip'];
             $params['reqtime'] = time();
             $params['wbversion'] = '1';
             $params['pf'] = 'php-sdk2.0beta';

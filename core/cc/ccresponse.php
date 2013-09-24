@@ -86,6 +86,7 @@ class CcResponse extends Response {
         }
         $header = "{$this->_protocol} {$this->_code} OK\r\n";
         $header .= implode("\r\n", $header_array);
+        $header .= "\r\n";
         foreach ($this->_cookies as $key => $value) {
             $cookie_str = array();
             if(!empty($value['expires'])){
@@ -98,7 +99,7 @@ class CcResponse extends Response {
             if(!empty($value['domain'])){
                 $cookie_str []= "domain={$value['domain']}";
             }
-            $header .= sprint("Set-Cookie: %s=%s; %s\r\n",$key,$value['value'],implode("; ",$cookie_str));
+            $header .= sprintf("Set-Cookie: %s=%s; %s\r\n",$key,$value['value'],implode("; ",$cookie_str));
         }
         $header .= "\r\n\r\n";
         return $header . $output;

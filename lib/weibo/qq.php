@@ -15,13 +15,12 @@ class Weibo_Qq {
     private $_callback = null;
 
     function __construct($request, $response,$callback) {
-        require_once TINY_ROOT . '.third/qqweibo/Tencent.php';
+        require_once TINY_ROOT . 'third/qqweibo/Tencent.php';
         OAuth::init(self::CLIENTID, self::SECRET);
         Tencent::$debug = false;
         $this->_response = $response;
         $this->_request = $request;
         $this->_callback = $callback;
-
         $t_access_token = $this->_request->getCookie('t_access_token');
         $t_openid = $this->_request->getCookie('t_openid');
         $t_openkey = $this->_request->getCookie('t_openkey');
@@ -29,7 +28,14 @@ class Weibo_Qq {
         if ($t_access_token || ($t_openid && $t_openkey)) {//用户已授权
             echo '<pre><h3>已授权</h3>用户信息：<br>';
             //获取用户信息
-            $r = Tencent::api('user/info');
+            $session =  array(
+                't_access_token' => $t_access_token,
+                't_openid' => $t_openid,
+                't_openkey' => $t_openkey,
+                'client_ip' => $this->_request->getClientIp(),
+                'server_ip' => $this->_request->getServerIp(),
+            );
+            $r = Tencent::api('user/info',$session);
             print_r(json_decode($r, true));
             echo '</pre>';
             // 部分接口的调用示例
@@ -83,8 +89,12 @@ class Weibo_Qq {
                     $this->_response->setCookie('t_openid',$openid);
                     $this->_response->setCookie('t_openkey',$openkey);
 
+                    $session =  array(
+                        't_openid' => $openid,
+                        't_openkey' => $openkey,
+                    );
                     //验证授权
-                    $r = OAuth::checkOAuthValid();
+                    $r = OAuth::checkOAuthValid($session);
                     if ($r) {
 //                        header('Location: ' . $callback); //刷新页面
                         $this->_response->redirect($callback);
@@ -100,8 +110,12 @@ class Weibo_Qq {
                 if ($openid && $openkey) {//应用频道
                     $this->_response->setCookie('t_openid',$openid);
                     $this->_response->setCookie('t_openkey',$openkey);
+                    $session =  array(
+                        't_openid' => $openid,
+                        't_openkey' => $openkey,
+                    );
                     //验证授权
-                    $r = OAuth::checkOAuthValid();
+                    $r = OAuth::checkOAuthValid($session);
                     if ($r) {
                         $this->_response->redirect($callback);
                     } else {
