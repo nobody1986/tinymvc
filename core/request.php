@@ -21,7 +21,12 @@ class Request {
     function __construct() {
     	$this->query_string = isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
 		$info_parsed = array();
-		if (isset($_GET[0])) {
+		if(!empty($_SERVER['PATH_INFO'])){
+			$slice = explode('/', trim($_SERVER['PATH_INFO']));
+			$this->controller = empty($slice[1]) ? TINY_DEFAULT_CONTROLLER : trim($slice[1]);
+			$this->action = empty($slice[2]) ? TINY_DEFAULT_ACTION : trim($slice[2]);
+		}
+		elseif (isset($_GET[0])) {
 			$slice = explode('/', trim($_GET[0]));
 			$this->controller = empty($slice[1]) ? TINY_DEFAULT_CONTROLLER : trim($slice[1]);
 			$this->action = empty($slice[2]) ? TINY_DEFAULT_ACTION : trim($slice[2]);

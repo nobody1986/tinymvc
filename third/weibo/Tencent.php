@@ -38,7 +38,7 @@ class OAuth
             'client_id' => self::$client_id,
             'redirect_uri' => $redirect_uri,
             'response_type' => $response_type,
-            'wap' => $type
+            'wap' => $wap
         );
         return self::$authorizeURL.'?'.http_build_query($params);
     }
