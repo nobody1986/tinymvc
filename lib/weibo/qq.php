@@ -25,6 +25,11 @@ class Weibo_Qq {
 		    $r = Tencent::api('user/info');
 		    print_r(json_decode($r, true));
 		    echo '</pre>';
+		    echo '<pre><h3>已授权</h3>粉丝列表<br>';
+		    //获取用户信息
+		    $r = Tencent::api('/friends/fanslist',array('reqnum'=>30,'startindex' => 0));
+		    print_r(json_decode($r, true));
+		    echo '</pre>';
 		    // 部分接口的调用示例
 		    /**
 		     * 发表图片微博
