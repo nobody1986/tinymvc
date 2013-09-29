@@ -31,8 +31,8 @@ class Weibo_Gateway {
     function getFollowList($pos,$num,$install=0){
         return $this->_weibo->getFollowList($pos,$num,$install);
     }
-    function getFriendsList($pos,$num,$install=0){
-        return $this->_weibo->getFriendsList($pos,$num,$install);
+    function getFriendsList($pos,$num,$fopenid=0,$name='',$install=0){
+        return $this->_weibo->getFriendsList($pos,$num,$fopenid,$name,$install);
     }
     function getBlackList($pos,$num){
         return $this->_weibo->getBlackList($pos,$num);

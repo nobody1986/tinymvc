@@ -19,8 +19,9 @@ class Weibo_Qq {
         OAuth::init(self::CLIENTID, self::SECRET);
         Tencent::$debug = false;
         $this->_callback = $callback;
-var_dump($_SESSION);
-        if (!empty($_SESSION['t_access_token']) || (!empty($_SESSION['t_openid']) && !empty($_SESSION['t_openkey']))) {//用户已授权
+//unset($_SESSION);
+        //var_dump($_SESSION);
+        if (!empty($_SESSION['t_access_token']) && (!empty($_SESSION['t_openid']) && !empty($_SESSION['t_openkey']))) {//用户已授权
             //验证授权
         } else {//未授权
             $callback = $this->_callback; //'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];//回调url
@@ -43,8 +44,6 @@ var_dump($_SESSION);
 
                     //验证授权
                     $r = OAuth::checkOAuthValid();
-                    var_dump($r);
-                    die();
                     if ($r) {
                         header('Location: ' . $callback); //刷新页面
                     } else {
@@ -73,8 +72,7 @@ var_dump($_SESSION);
     }
 
     function getUserInfo() {
-        $ret = Tencent::api('friends/add');
-        var_dump($ret);
+        $ret = Tencent::api('user/info');
         $ret = json_decode($ret, true);
         return $ret['ret'] == self::RET_OK?$ret['data']:false;
     }
@@ -100,13 +98,20 @@ var_dump($_SESSION);
         return $ret['ret'] == self::RET_OK?$ret['data']:false;
     }
 
-    function getFriendsList($pos,$num,$install=0) {
+    function getFriendsList($pos,$num,$fopenid=0,$name='',$install=0) {
         $param =  array();
         $param['startindex'] = $pos;
         $param['reqnum'] = $num;
         $param['install'] = $install;
+        if (!empty($fopenid)) {
+           $param['fopenid'] = $fopenid;
+        }
+        if (!empty($name)) {
+           $param['name'] = $name;
+        }
         $ret = Tencent::api('friends/mutual_list', $param);
         $ret = json_decode($ret, true);
+        
         return $ret['ret'] == self::RET_OK?$ret['data']:false;
     }
 
